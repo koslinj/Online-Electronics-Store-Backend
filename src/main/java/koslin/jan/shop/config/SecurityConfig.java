@@ -21,13 +21,13 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        String[] public_routes = JwtAuthenticationFilter.PUBLIC_PATHS.toArray(new String[0]);
+
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/products").permitAll()
-                                .requestMatchers("/images/**").permitAll()
+                                .requestMatchers(public_routes).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(

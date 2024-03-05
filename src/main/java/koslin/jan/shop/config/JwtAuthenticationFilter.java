@@ -12,14 +12,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
+    public static final List<String> PUBLIC_PATHS = Arrays.asList("/auth/**", "/images/**", "/products/**");
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
@@ -32,7 +36,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith("Bearer ") || isPublicPath(request)) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -53,5 +57,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(request,response);
+    }
+
+    private boolean isPublicPath(HttpServletRequest request) {
+        AntPathMatcher pathMatcher = new AntPathMatcher();
+        return PUBLIC_PATHS.stream().anyMatch(path -> pathMatcher.match(path, request.getServletPath()));
     }
 }
