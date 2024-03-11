@@ -23,8 +23,13 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoryDto>> getCategories(){
-        List<CategoryDto> categories = categoryService.getCategories();
-        return new ResponseEntity<>(categories, HttpStatus.OK);
+    public ResponseEntity<List<CategoryDto>> getCategories(@RequestParam(required = false) String generalCategory) {
+        if (generalCategory != null) {
+            List<CategoryDto> categories = categoryService.getCategoriesByGeneralCategory(generalCategory);
+            return new ResponseEntity<>(categories, HttpStatus.OK);
+        } else {
+            List<CategoryDto> categories = categoryService.getCategories();
+            return new ResponseEntity<>(categories, HttpStatus.OK);
+        }
     }
 }

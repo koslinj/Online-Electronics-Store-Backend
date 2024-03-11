@@ -30,4 +30,11 @@ public class CategoryServiceImpl implements CategoryService {
                 .map(CategoryMapper::toDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<CategoryDto> getCategoriesByGeneralCategory(String generalCategory) {
+        return categoryRepository.findByGeneralCategory(generalCategory).stream()
+                .map(CategoryMapper::toDto)
+                .collect(Collectors.toList());
+    }
 }

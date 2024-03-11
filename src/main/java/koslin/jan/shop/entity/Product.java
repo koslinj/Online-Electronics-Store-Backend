@@ -11,19 +11,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "products")
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String generalCategory;
-
-    @Column(unique = true, nullable = false)
     private String name;
+    private String description;
+    private double price;
+    private String imageUrl;
 
-    @Column(unique = true, nullable = false)
-    private String urlName;
+    @ManyToOne
+    private Category category;
 }

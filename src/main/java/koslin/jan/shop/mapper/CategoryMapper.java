@@ -6,10 +6,20 @@ import koslin.jan.shop.entity.Category;
 public class CategoryMapper {
 
     public static CategoryDto toDto(Category category){
-        return new CategoryDto(category.getId(), category.getName());
+        return new CategoryDto(
+                category.getId(),
+                category.getGeneralCategory(),
+                category.getName(),
+                category.getUrlName()
+        );
     }
 
     public static Category toEntity(CategoryDto categoryDto){
-        return new Category(categoryDto.getId(), categoryDto.getName());
+        return new Category(
+                categoryDto.getId(),
+                categoryDto.getGeneralCategory(),
+                categoryDto.getName(),
+                categoryDto.getUrlName()
+        );
     }
 }
