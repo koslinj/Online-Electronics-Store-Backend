@@ -20,6 +20,11 @@ public class ProductController {
 
     private ProductService productService;
 
+    @GetMapping(params = "search")
+    public ResponseEntity<List<ProductDto>> searchProducts(@RequestParam String search) {
+        List<ProductDto> searchedProducts = productService.searchProducts(search);
+        return new ResponseEntity<>(searchedProducts, HttpStatus.OK);
+    }
     @GetMapping
     public ResponseEntity<List<ProductDto>> getProducts() {
         List<ProductDto> allProducts = productService.getProducts();

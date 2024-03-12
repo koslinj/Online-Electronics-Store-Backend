@@ -22,6 +22,16 @@ public class ProductServiceImpl implements ProductService {
     private CategoryRepository categoryRepository;
 
     @Override
+    public List<ProductDto> searchProducts(String search) {
+        return productRepository.findAll().stream()
+                .map(ProductMapper::toDto)
+                .filter(product ->
+                        product.getName().toLowerCase().contains(search.toLowerCase())
+                )
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<ProductDto> getProducts() {
         return productRepository.findAll().stream()
                 .map(ProductMapper::toDto)
