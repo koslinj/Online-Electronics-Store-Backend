@@ -21,15 +21,14 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> getProducts(@RequestParam(required = false) String category) {
-        if (category != null) {
-            // Filter products based on the category ID
-            List<ProductDto> productsByCategory = productService.getProductsByUrlName(category);
-            return new ResponseEntity<>(productsByCategory, HttpStatus.OK);
-        } else {
-            // If no category ID is provided, return all products
-            List<ProductDto> allProducts = productService.getProducts();
-            return new ResponseEntity<>(allProducts, HttpStatus.OK);
-        }
+    public ResponseEntity<List<ProductDto>> getProducts() {
+        List<ProductDto> allProducts = productService.getProducts();
+        return new ResponseEntity<>(allProducts, HttpStatus.OK);
+    }
+
+    @GetMapping(params = "category")
+    public ResponseEntity<List<ProductDto>> getProductsByCategory(@RequestParam String category) {
+        List<ProductDto> productsByCategory = productService.getProductsByUrlName(category);
+        return new ResponseEntity<>(productsByCategory, HttpStatus.OK);
     }
 }
