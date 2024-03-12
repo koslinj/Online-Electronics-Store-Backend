@@ -23,7 +23,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    public static final List<String> PUBLIC_PATHS = Arrays.asList("/auth/**", "/images/**", "/products/**");
+    public static final List<String> PUBLIC_PATHS = Arrays.asList(
+            "/auth/**",
+            "/images/**",
+            "/products/**",
+            "/categories/**"
+    );
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
 
