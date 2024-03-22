@@ -9,6 +9,7 @@ public class CategoryMapper {
         return new CategoryDto(
                 category.getId(),
                 category.getGeneralCategory(),
+                category.getUrlGeneralCategory(),
                 category.getName(),
                 category.getUrlName()
         );
@@ -18,6 +19,7 @@ public class CategoryMapper {
         return new Category(
                 categoryDto.getId(),
                 categoryDto.getGeneralCategory(),
+                categoryDto.getUrlGeneralCategory(),
                 categoryDto.getName(),
                 categoryDto.getUrlName()
         );

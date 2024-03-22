@@ -8,5 +8,7 @@ import java.util.Collection;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Category findByName(String name);
 
-    Collection<Category> findByGeneralCategory(String generalCategory);
+    Collection<Category> findByUrlGeneralCategory(String urlGeneralCategory);
+
+    Category findByUrlName(String urlName);
 }

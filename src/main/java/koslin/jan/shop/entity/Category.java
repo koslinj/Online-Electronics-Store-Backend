@@ -22,6 +22,9 @@ public class Category {
     private String generalCategory;
 
     @Column(unique = true, nullable = false)
+    private String urlGeneralCategory;
+
+    @Column(unique = true, nullable = false)
     private String name;
 
     @Column(unique = true, nullable = false)

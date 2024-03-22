@@ -9,5 +9,7 @@ public interface CategoryService {
 
     List<CategoryDto> getCategories();
 
-    List<CategoryDto> getCategoriesByGeneralCategory(String generalCategory);
+    List<CategoryDto> getCategoriesByUrlGeneralCategory(String generalCategory);
+
+    CategoryDto getCategoryByUrlName(String name);
 }

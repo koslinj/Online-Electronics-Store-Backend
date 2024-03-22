@@ -12,6 +12,7 @@ import lombok.Setter;
 public class CategoryDto {
     private Long id;
     private String generalCategory;
+    private String urlGeneralCategory;
     private String name;
     private String urlName;
 }
