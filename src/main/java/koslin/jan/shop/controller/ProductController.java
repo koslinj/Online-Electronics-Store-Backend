@@ -6,10 +6,7 @@ import koslin.jan.shop.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +26,12 @@ public class ProductController {
     public ResponseEntity<List<ProductDto>> getProducts() {
         List<ProductDto> allProducts = productService.getProducts();
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto dto){
+        ProductDto saved = productService.createProduct(dto);
+        return new ResponseEntity<>(saved, HttpStatus.OK);
     }
 
     @GetMapping(params = "category")

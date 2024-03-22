@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,4 +19,6 @@ public class ProductDto {
     private double price;
     private String imageUrl;
     private String categoryName;
+    private List<String> filterNames;
+    private List<String> filterValues;
 }

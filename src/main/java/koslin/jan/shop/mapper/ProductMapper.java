@@ -2,7 +2,11 @@ package koslin.jan.shop.mapper;
 
 import koslin.jan.shop.dto.ProductDto;
 import koslin.jan.shop.entity.Category;
+import koslin.jan.shop.entity.Filter;
 import koslin.jan.shop.entity.Product;
+import koslin.jan.shop.entity.ProductFilter;
+
+import java.util.Set;
 
 public class ProductMapper {
     public static ProductDto toDto(Product product) {
@@ -12,18 +16,21 @@ public class ProductMapper {
                 product.getDescription(),
                 product.getPrice(),
                 product.getImageUrl(),
-                product.getCategory().getName()
+                product.getCategory().getName(),
+                product.getProductFilters().stream().map(productFilter -> productFilter.getFilter().getName()).toList(),
+                product.getProductFilters().stream().map(ProductFilter::getFilterValue).toList()
         );
     }
 
-    public static Product toEntity(ProductDto productDto, Category category) {
+    public static Product toEntity(ProductDto productDto, Category category, Set<ProductFilter> filters) {
         return new Product(
                 productDto.getId(),
                 productDto.getName(),
                 productDto.getDescription(),
                 productDto.getPrice(),
                 productDto.getImageUrl(),
-                category
+                category,
+                filters
         );
     }
 }

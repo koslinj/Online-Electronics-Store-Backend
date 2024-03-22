@@ -13,22 +13,15 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "filters")
+public class Filter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
-    @Column(length = 2047)
-    private String description;
-    private double price;
-    private String imageUrl;
 
-    @ManyToOne
-    private Category category;
-
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "filter")
     private Set<ProductFilter> productFilters;
 }

@@ -6,29 +6,27 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "products")
-public class Product {
+@Table(name = "product_filters")
+public class ProductFilter {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    @Column(length = 2047)
-    private String description;
-    private double price;
-    private String imageUrl;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @ManyToOne
-    private Category category;
+    @JoinColumn(name = "filter_id")
+    private Filter filter;
 
-    @OneToMany(mappedBy = "product")
-    private Set<ProductFilter> productFilters;
+    @Column(name = "filter_value")
+    private String filterValue;
+
 }
