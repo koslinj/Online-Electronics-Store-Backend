@@ -10,4 +10,6 @@ public interface ProductService {
     List<ProductDto> getProducts();
     ProductDto createProduct(ProductDto productDto);
     List<ProductDto> getProductsByUrlName(String urlName);
+
+    ProductDto getProduct(String name);
 }

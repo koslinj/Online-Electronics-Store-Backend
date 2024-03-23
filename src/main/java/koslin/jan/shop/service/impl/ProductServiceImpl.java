@@ -8,6 +8,7 @@ import koslin.jan.shop.entity.ProductFilter;
 import koslin.jan.shop.mapper.ProductMapper;
 import koslin.jan.shop.repository.CategoryRepository;
 import koslin.jan.shop.repository.FilterRepository;
+import koslin.jan.shop.repository.ProductFilterRepository;
 import koslin.jan.shop.repository.ProductRepository;
 import koslin.jan.shop.service.ProductService;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
+    private ProductFilterRepository productFilterRepository;
     private CategoryRepository categoryRepository;
     private FilterRepository filterRepository;
 
@@ -47,6 +49,22 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto createProduct(ProductDto productDto) {
         Category category = categoryRepository.findByName(productDto.getCategoryName());
 
+        // Check if the category exists
+        if (category == null) {
+            throw new IllegalArgumentException("Category does not exist");
+        }
+
+        Product product = ProductMapper.toEntity(productDto, category);
+        Product savedProduct = productRepository.save(product);
+
+        Set<ProductFilter> productFilters = saveProductFilters(productDto, savedProduct);
+
+        savedProduct.setProductFilters(productFilters);
+
+        return ProductMapper.toDto(savedProduct);
+    }
+
+    private Set<ProductFilter> saveProductFilters(ProductDto productDto, Product savedProduct) {
         Set<ProductFilter> productFilters = new HashSet<>();
         for (int i = 0; i < productDto.getFilterNames().size(); i++) {
             String filterName = productDto.getFilterNames().get(i);
@@ -56,21 +74,14 @@ public class ProductServiceImpl implements ProductService {
                 ProductFilter productFilter = new ProductFilter();
                 productFilter.setFilter(filter);
                 productFilter.setFilterValue(filterValue);
+                productFilter.setProduct(savedProduct);
+                productFilterRepository.save(productFilter);
                 productFilters.add(productFilter);
             } else {
                 // Handle error or log a message if filter is not found
             }
         }
-
-        // Check if the category exists
-        if (category == null) {
-            throw new IllegalArgumentException("Category does not exist");
-        }
-
-        Product product = ProductMapper.toEntity(productDto, category, productFilters);
-        Product savedProduct = productRepository.save(product);
-
-        return ProductMapper.toDto(savedProduct);
+        return productFilters;
     }
 
     @Override
@@ -78,5 +89,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByCategoryUrlName(urlName).stream()
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductDto getProduct(String name) {
+        Product product = productRepository.findByName(name);
+        return ProductMapper.toDto(product);
     }
 }

@@ -7,4 +7,5 @@ import java.util.Collection;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Collection<Product> findByCategoryUrlName(String urlName);
+    Product findByName(String name);
 }
