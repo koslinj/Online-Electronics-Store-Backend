@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class ApplicationConfig {
 
     private final UserRepository userRepository;
+    public static String IMAGE_DIR = "src/main/resources/static/images/";
 
     @Bean
     public UserDetailsService userDetailsService() {
