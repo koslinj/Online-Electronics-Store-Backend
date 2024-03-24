@@ -9,6 +9,10 @@ import koslin.jan.shop.entity.User;
 import koslin.jan.shop.repository.UserRepository;
 import koslin.jan.shop.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,7 +28,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public AuthenticationResponse register(RegisterRequest request) {
+    public ResponseEntity<AuthenticationResponse> register(RegisterRequest request) {
         User user;
         if (request.getPassword().equals("admin")) {
             user = User.builder()
@@ -44,12 +48,25 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     .build();
         }
 
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            if (e.getCause() instanceof ConstraintViolationException) {
+                ConstraintViolationException constraintViolationException = (ConstraintViolationException) e.getCause();
+                if ("users.email_UNIQUE".equals(constraintViolationException.getConstraintName())) {
+                    // Duplicate entry for email
+                    return ResponseEntity.status(HttpStatus.CONFLICT)
+                            .body(AuthenticationResponse.builder().build());
+                }
+            }
+            // Handle other data integrity violations as needed
+            throw e; // Rethrow the exception for other cases
+        }
 
         var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
+        return ResponseEntity.ok(AuthenticationResponse.builder()
                 .token(jwtToken)
-                .build();
+                .build());
     }
 
     @Override
