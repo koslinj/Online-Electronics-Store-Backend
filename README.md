@@ -27,11 +27,11 @@ During development I followed MVC (Model View Controller) Architecture. I tried 
 ## Installation
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/online-electronics-store-backend.git
+   git clone https://github.com/koslinj/Online-Electronics-Store-Backend.git
    ```
 2. **Navigate to the project directory:**
    ```bash
-   cd online-electronics-store-backend
+   cd Online-Electronics-Store-Backend
    ```
 3. **Set up MySQL database:**
    - Create a MySQL database for the project.
