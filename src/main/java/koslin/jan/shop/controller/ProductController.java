@@ -5,6 +5,8 @@ import koslin.jan.shop.dto.ProductDto;
 import koslin.jan.shop.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +38,16 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<ProductDto>> getProducts() {
         List<ProductDto> allProducts = productService.getProducts();
         return new ResponseEntity<>(allProducts, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<ProductDto>> getProducts(Pageable pageable) {
+        Page<ProductDto> products = productService.getProducts(pageable);
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping(params = "name")

@@ -13,6 +13,8 @@ import koslin.jan.shop.repository.ProductFilterRepository;
 import koslin.jan.shop.repository.ProductRepository;
 import koslin.jan.shop.service.ProductService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -44,6 +46,12 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll().stream()
                 .map(ProductMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Page<ProductDto> getProducts(Pageable pageable) {
+        return productRepository.findAll(pageable)
+                .map(ProductMapper::toDto);
     }
 
     @Override
