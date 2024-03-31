@@ -31,6 +31,11 @@ public class ProductController {
         return new ResponseEntity<>(searchedProducts, HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable("id") Long id) {
+        productService.deleteProduct(id);
+    }
+
     @GetMapping
     public ResponseEntity<List<ProductDto>> getProducts() {
         List<ProductDto> allProducts = productService.getProducts();

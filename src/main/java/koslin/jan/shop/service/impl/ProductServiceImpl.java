@@ -1,5 +1,6 @@
 package koslin.jan.shop.service.impl;
 
+import jakarta.transaction.Transactional;
 import koslin.jan.shop.dto.ProductDto;
 import koslin.jan.shop.entity.Category;
 import koslin.jan.shop.entity.Filter;
@@ -95,5 +96,12 @@ public class ProductServiceImpl implements ProductService {
     public ProductDto getProduct(String name) {
         Product product = productRepository.findByName(name);
         return ProductMapper.toDto(product);
+    }
+
+    @Override
+    @Transactional
+    public void deleteProduct(Long id) {
+        productFilterRepository.deleteAllByProductId(id);
+        productRepository.deleteById(id);
     }
 }

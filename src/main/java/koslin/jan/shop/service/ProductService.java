@@ -12,4 +12,6 @@ public interface ProductService {
     List<ProductDto> getProductsByUrlName(String urlName);
 
     ProductDto getProduct(String name);
+
+    void deleteProduct(Long id);
 }
