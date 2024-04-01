@@ -16,6 +16,7 @@ public class ProductMapper {
                 product.getPrice(),
                 product.getImageUrl(),
                 product.getCategory().getName(),
+                product.getCategory().getUrlName(),
                 product.getProductFilters().stream().map(productFilter -> productFilter.getFilter().getName()).toList(),
                 product.getProductFilters().stream().map(ProductFilter::getFilterValue).toList()
         );

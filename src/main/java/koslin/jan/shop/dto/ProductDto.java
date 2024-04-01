@@ -19,6 +19,7 @@ public class ProductDto {
     private double price;
     private String imageUrl;
     private String categoryName;
+    private String categoryUrl;
     private List<String> filterNames;
     private List<String> filterValues;
 }
