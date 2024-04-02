@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OpinionService {
     List<OpinionDto> getOpinionsByProductId(Long id);
+
+    List<OpinionDto> getOpinionsByUsername(String username);
 }

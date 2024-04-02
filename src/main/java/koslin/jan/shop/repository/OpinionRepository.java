@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface OpinionRepository extends JpaRepository<Opinion, Long> {
     List<Opinion> getAllByProductId(Long id);
+    List<Opinion> getAllByUserEmail(String username);
 }

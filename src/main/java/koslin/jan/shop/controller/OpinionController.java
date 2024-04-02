@@ -21,4 +21,10 @@ public class OpinionController {
         List<OpinionDto> opions = opinionService.getOpinionsByProductId(id);
         return new ResponseEntity<>(opions, HttpStatus.OK);
     }
+
+    @GetMapping(params = "username")
+    public ResponseEntity<List<OpinionDto>> getOpinionsByProductId(@RequestParam String username) {
+        List<OpinionDto> opions = opinionService.getOpinionsByUsername(username);
+        return new ResponseEntity<>(opions, HttpStatus.OK);
+    }
 }
