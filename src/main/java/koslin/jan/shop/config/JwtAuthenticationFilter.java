@@ -27,7 +27,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             "/auth/**",
             "/images/**",
             "/products/**",
-            "/categories/**"
+            "/categories/**",
+            "/opinions/**"
     );
     private final JwtService jwtService;
     private final UserDetailsService userDetailsService;
