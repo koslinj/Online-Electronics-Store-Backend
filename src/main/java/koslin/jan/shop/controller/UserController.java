@@ -2,6 +2,7 @@ package koslin.jan.shop.controller;
 
 
 import koslin.jan.shop.dto.UserDto;
+import koslin.jan.shop.entity.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,9 +23,14 @@ public class UserController {
                 .findFirst()
                 .map(GrantedAuthority::getAuthority)
                 .orElse(null);
+        String firstName = "";
+
+        if(userDetails instanceof User) {
+            firstName = ((User) userDetails).getFirstName();
+        }
 
         // Create a DTO with user information
-        UserDto userDto = new UserDto(username, role);
+        UserDto userDto = new UserDto(username, role, firstName);
 
         return ResponseEntity.ok(userDto);
     }
