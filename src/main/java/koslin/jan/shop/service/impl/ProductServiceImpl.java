@@ -112,4 +112,10 @@ public class ProductServiceImpl implements ProductService {
         productFilterRepository.deleteAllByProductId(id);
         productRepository.deleteById(id);
     }
+
+    @Override
+    public ProductDto getProductById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow();
+        return ProductMapper.toDto(product);
+    }
 }

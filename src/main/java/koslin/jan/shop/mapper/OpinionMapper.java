@@ -14,7 +14,8 @@ public class OpinionMapper {
                 opinion.getStars(),
                 opinion.getContent(),
                 opinion.getCreatedAt(),
-                opinion.getUser().getFirstName()
+                opinion.getUser().getFirstName(),
+                opinion.getProduct().getId()
         );
     }
 

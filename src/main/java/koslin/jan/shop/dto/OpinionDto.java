@@ -17,4 +17,5 @@ public class OpinionDto {
     private String content;
     private Instant createdAt;
     private String user;
+    private Long productId;
 }
