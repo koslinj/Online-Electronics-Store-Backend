@@ -47,7 +47,7 @@ public class OpinionServiceImpl implements OpinionService {
         User user = userRepository.findByEmail(username).orElseThrow();
 
         Opinion opinion = OpinionMapper.toEntity(dto, product, user);
-        opinionRepository.save(opinion);
-        return null;
+        Opinion saved = opinionRepository.save(opinion);
+        return OpinionMapper.toDto(saved);
     }
 }
