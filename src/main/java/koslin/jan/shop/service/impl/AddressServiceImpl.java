@@ -68,4 +68,9 @@ public class AddressServiceImpl implements AddressService {
         return AddressMapper.toDto(saved);
     }
 
+    @Override
+    public void deleteAddress(Long id) {
+        addressRepository.deleteById(id);
+    }
+
 }

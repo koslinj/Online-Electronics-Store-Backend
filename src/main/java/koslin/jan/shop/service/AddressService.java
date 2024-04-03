@@ -28,4 +28,6 @@ public interface AddressService {
             String email,
             String username
     );
+
+    void deleteAddress(Long id);
 }

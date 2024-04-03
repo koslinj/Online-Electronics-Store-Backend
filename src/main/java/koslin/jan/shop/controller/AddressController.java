@@ -58,4 +58,9 @@ public class AddressController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteAddress(@PathVariable("id") Long id) {
+        addressService.deleteAddress(id);
+    }
+
 }
