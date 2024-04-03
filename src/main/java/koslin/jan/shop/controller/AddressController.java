@@ -38,4 +38,24 @@ public class AddressController {
         return new ResponseEntity<>(saved, HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<AddressDto> updateAddress(
+            @PathVariable("id") Long id,
+            @RequestParam("fullName") String fullName,
+            @RequestParam("street") String street,
+            @RequestParam("zipCode") String zipCode,
+            @RequestParam("city") String city,
+            @RequestParam("phone") String phone,
+            @RequestParam("email") String email,
+            @RequestParam("username") String username
+    ) {
+        AddressDto updated = addressService.updateAddress(id, fullName, street, zipCode, city, phone, email, username);
+
+        if (updated != null) {
+            return new ResponseEntity<>(updated, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

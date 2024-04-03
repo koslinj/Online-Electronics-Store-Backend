@@ -17,4 +17,15 @@ public interface AddressService {
             String email,
             String username
     );
+
+    AddressDto updateAddress(
+            Long id,
+            String fullName,
+            String street,
+            String zipCode,
+            String city,
+            String phone,
+            String email,
+            String username
+    );
 }

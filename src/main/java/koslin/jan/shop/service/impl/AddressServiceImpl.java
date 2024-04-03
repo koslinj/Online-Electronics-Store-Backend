@@ -42,4 +42,30 @@ public class AddressServiceImpl implements AddressService {
         return AddressMapper.toDto(saved);
     }
 
+    @Override
+    public AddressDto updateAddress(Long id, String fullName, String street, String zipCode, String city, String phone, String email, String username) {
+        // Retrieve the address from the repository using its ID
+        Address address = addressRepository.findById(id).orElseThrow();
+
+        // Update the fields with the new values
+        address.setFullName(fullName);
+        address.setStreet(street);
+        address.setZipCode(zipCode);
+        address.setCity(city);
+        address.setPhone(phone);
+        address.setEmail(email);
+
+        // Find the user associated with the address
+        User user = userRepository.findByEmail(username).orElseThrow();
+
+        // Update the user associated with the address
+        address.setUser(user);
+
+        // Save the updated address back to the repository
+        Address saved = addressRepository.save(address);
+
+        // Map the updated address to DTO and return
+        return AddressMapper.toDto(saved);
+    }
+
 }
