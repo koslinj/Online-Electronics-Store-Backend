@@ -5,6 +5,7 @@ import koslin.jan.shop.dto.PurchaseOrderDto;
 import koslin.jan.shop.dto.PurchaseOrderItemDto;
 import koslin.jan.shop.entity.*;
 import koslin.jan.shop.mapper.OpinionMapper;
+import koslin.jan.shop.mapper.ProductMapper;
 import koslin.jan.shop.mapper.PurchaseOrderMapper;
 import koslin.jan.shop.repository.ProductRepository;
 import koslin.jan.shop.repository.PurchaseOrderItemRepository;
@@ -12,6 +13,8 @@ import koslin.jan.shop.repository.PurchaseOrderRepository;
 import koslin.jan.shop.repository.UserRepository;
 import koslin.jan.shop.service.PurchaseOrderService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -49,6 +52,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         purchaseOrderItemRepository.saveAll(purchaseOrderItems);
 
         return PurchaseOrderMapper.toDto(saved);
+    }
+
+    @Override
+    public Page<PurchaseOrderDto> getPurchaseOrders(Pageable pageable) {
+        return purchaseOrderRepository.findAll(pageable)
+                .map(PurchaseOrderMapper::toDto);
     }
 
     @Override
