@@ -16,5 +16,7 @@ public class PurchaseOrderDto {
     private Long id;
     private Instant createdAt;
     private String user;
+    private String state;
+    private double sum;
     private List<PurchaseOrderItemDto> items;
 }

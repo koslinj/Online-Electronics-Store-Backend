@@ -25,6 +25,10 @@ public class PurchaseOrder {
     @CreationTimestamp
     private Instant createdAt;
 
+    private String state;
+
+    private double sum;
+
     @OneToMany(mappedBy = "purchaseOrder")
     private List<PurchaseOrderItem> purchaseOrderItems;
 

@@ -15,6 +15,8 @@ public class PurchaseOrderMapper {
                 order.getId(),
                 order.getCreatedAt(),
                 order.getUser().getEmail(),
+                order.getState(),
+                order.getSum(),
                 order.getPurchaseOrderItems().stream()
                         .map(item -> {
                             PurchaseOrderItemDto dto = new PurchaseOrderItemDto();
@@ -32,6 +34,8 @@ public class PurchaseOrderMapper {
         return new PurchaseOrder(
                 dto.getId(),
                 dto.getCreatedAt(),
+                dto.getState(),
+                dto.getSum(),
                 items,
                 user
         );
