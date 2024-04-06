@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface PurchaseOrderService {
-    PurchaseOrderDto createPurchaseOrder(String username, List<PurchaseOrderItemDto> items);
+    PurchaseOrderDto createPurchaseOrder(String username, double sum, List<PurchaseOrderItemDto> items);
 
     Page<PurchaseOrderDto> getPurchaseOrders(Pageable pageable);
 

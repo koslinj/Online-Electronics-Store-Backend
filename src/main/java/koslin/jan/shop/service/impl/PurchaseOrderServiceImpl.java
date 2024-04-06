@@ -1,11 +1,8 @@
 package koslin.jan.shop.service.impl;
 
-import koslin.jan.shop.dto.OpinionDto;
 import koslin.jan.shop.dto.PurchaseOrderDto;
 import koslin.jan.shop.dto.PurchaseOrderItemDto;
 import koslin.jan.shop.entity.*;
-import koslin.jan.shop.mapper.OpinionMapper;
-import koslin.jan.shop.mapper.ProductMapper;
 import koslin.jan.shop.mapper.PurchaseOrderMapper;
 import koslin.jan.shop.repository.ProductRepository;
 import koslin.jan.shop.repository.PurchaseOrderItemRepository;
@@ -30,8 +27,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     private ProductRepository productRepository;
 
     @Override
-    public PurchaseOrderDto createPurchaseOrder(String username, List<PurchaseOrderItemDto> items) {
+    public PurchaseOrderDto createPurchaseOrder(String username, double sum, List<PurchaseOrderItemDto> items) {
         PurchaseOrderDto dto = new PurchaseOrderDto();
+        dto.setSum(sum);
+        dto.setState("Oczekuje na zatwierdzenie");
         User user = userRepository.findByEmail(username).orElseThrow();
 
         List<PurchaseOrderItem> purchaseOrderItems = new ArrayList<>();
