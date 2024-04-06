@@ -22,7 +22,7 @@ public class OpinionController {
     }
 
     @GetMapping(params = "username")
-    public ResponseEntity<List<OpinionDto>> getOpinionsByProductId(@RequestParam String username) {
+    public ResponseEntity<List<OpinionDto>> getOpinionsByUsername(@RequestParam String username) {
         List<OpinionDto> opions = opinionService.getOpinionsByUsername(username);
         return new ResponseEntity<>(opions, HttpStatus.OK);
     }
