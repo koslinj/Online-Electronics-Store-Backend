@@ -118,4 +118,14 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id).orElseThrow();
         return ProductMapper.toDto(product);
     }
+
+    @Override
+    public List<ProductDto> searchProductsFromCategory(String search, String category) {
+        return productRepository.findByCategoryUrlName(category).stream()
+                .map(ProductMapper::toDto)
+                .filter(product ->
+                        product.getName().toLowerCase().contains(search.toLowerCase())
+                )
+                .toList();
+    }
 }
