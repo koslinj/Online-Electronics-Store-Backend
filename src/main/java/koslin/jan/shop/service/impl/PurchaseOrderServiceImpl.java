@@ -61,6 +61,14 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public List<PurchaseOrderDto> getOrdersByUsername(String username) {
+        return purchaseOrderRepository.getAllByUserEmail(username)
+                .stream()
+                .map(PurchaseOrderMapper::toDto)
+                .toList();
+    }
+
+    @Override
     public List<PurchaseOrderDto> getAll() {
         return purchaseOrderRepository.findAll()
                 .stream()

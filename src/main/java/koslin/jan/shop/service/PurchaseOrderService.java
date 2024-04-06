@@ -1,6 +1,5 @@
 package koslin.jan.shop.service;
 
-import koslin.jan.shop.dto.ProductDto;
 import koslin.jan.shop.dto.PurchaseOrderDto;
 import koslin.jan.shop.dto.PurchaseOrderItemDto;
 import org.springframework.data.domain.Page;
@@ -12,6 +11,8 @@ public interface PurchaseOrderService {
     PurchaseOrderDto createPurchaseOrder(String username, List<PurchaseOrderItemDto> items);
 
     Page<PurchaseOrderDto> getPurchaseOrders(Pageable pageable);
+
+    List<PurchaseOrderDto> getOrdersByUsername(String username);
 
     List<PurchaseOrderDto> getAll();
 }
