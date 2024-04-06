@@ -1,5 +1,6 @@
 package koslin.jan.shop.controller;
 
+import koslin.jan.shop.dto.AddressDto;
 import koslin.jan.shop.dto.OpinionDto;
 import koslin.jan.shop.dto.PurchaseOrderDto;
 import koslin.jan.shop.service.PurchaseOrderService;
@@ -46,5 +47,19 @@ public class PurchaseOrderController {
         );
 
         return new ResponseEntity<>(saved, HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PurchaseOrderDto> updateAddress(
+            @PathVariable("id") Long id,
+            @RequestParam("state") String state
+    ) {
+        PurchaseOrderDto updated = purchaseOrderService.updateOrder(id, state);
+
+        if (updated != null) {
+            return new ResponseEntity<>(updated, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
