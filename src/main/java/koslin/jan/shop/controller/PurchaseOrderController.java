@@ -38,7 +38,7 @@ public class PurchaseOrderController {
     }
 
     @PostMapping
-    public ResponseEntity<PurchaseOrderDto> createOpinion(@RequestBody PurchaseOrderDto req) {
+    public ResponseEntity<PurchaseOrderDto> createOrder(@RequestBody PurchaseOrderDto req) {
         PurchaseOrderDto saved = purchaseOrderService.createPurchaseOrder(
                 req.getUser(),
                 req.getItems()
