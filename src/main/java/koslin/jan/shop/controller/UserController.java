@@ -24,13 +24,15 @@ public class UserController {
                 .map(GrantedAuthority::getAuthority)
                 .orElse(null);
         String firstName = "";
+        String lastName = "";
 
         if(userDetails instanceof User) {
             firstName = ((User) userDetails).getFirstName();
+            lastName = ((User) userDetails).getLastName();
         }
 
         // Create a DTO with user information
-        UserDto userDto = new UserDto(username, role, firstName);
+        UserDto userDto = new UserDto(username, role, firstName, lastName);
 
         return ResponseEntity.ok(userDto);
     }
