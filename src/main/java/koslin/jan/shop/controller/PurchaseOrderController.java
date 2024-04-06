@@ -41,6 +41,7 @@ public class PurchaseOrderController {
     public ResponseEntity<PurchaseOrderDto> createOrder(@RequestBody PurchaseOrderDto req) {
         PurchaseOrderDto saved = purchaseOrderService.createPurchaseOrder(
                 req.getUser(),
+                req.getSum(),
                 req.getItems()
         );
 
