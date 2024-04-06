@@ -57,6 +57,15 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     }
 
     @Override
+    public PurchaseOrderDto updateOrder(Long id, String state) {
+        PurchaseOrder order = purchaseOrderRepository.findById(id).orElseThrow();
+        order.setState(state);
+
+        PurchaseOrder saved = purchaseOrderRepository.save(order);
+        return PurchaseOrderMapper.toDto(saved);
+    }
+
+    @Override
     public Page<PurchaseOrderDto> getPurchaseOrders(Pageable pageable) {
         pageable = PageRequest.of(
                 pageable.getPageNumber(),
