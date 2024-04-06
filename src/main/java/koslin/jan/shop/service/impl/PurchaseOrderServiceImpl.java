@@ -11,7 +11,9 @@ import koslin.jan.shop.repository.UserRepository;
 import koslin.jan.shop.service.PurchaseOrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -56,6 +58,12 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
 
     @Override
     public Page<PurchaseOrderDto> getPurchaseOrders(Pageable pageable) {
+        pageable = PageRequest.of(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                Sort.by(Sort.Direction.DESC, "createdAt")
+        );
+
         return purchaseOrderRepository.findAll(pageable)
                 .map(PurchaseOrderMapper::toDto);
     }
