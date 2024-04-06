@@ -1,5 +1,6 @@
 package koslin.jan.shop.controller;
 
+import koslin.jan.shop.dto.OpinionDto;
 import koslin.jan.shop.dto.PurchaseOrderDto;
 import koslin.jan.shop.service.PurchaseOrderService;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,12 @@ public class PurchaseOrderController {
     public ResponseEntity<List<PurchaseOrderDto>> getAll() {
         List<PurchaseOrderDto> allOrders = purchaseOrderService.getAll();
         return new ResponseEntity<>(allOrders, HttpStatus.OK);
+    }
+
+    @GetMapping(params = "username")
+    public ResponseEntity<List<PurchaseOrderDto>> getOrdersByUsername(@RequestParam String username) {
+        List<PurchaseOrderDto> orders = purchaseOrderService.getOrdersByUsername(username);
+        return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
     @GetMapping
