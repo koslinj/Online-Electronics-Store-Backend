@@ -1,9 +1,5 @@
 # Online Electronics Store Backend
 
-***Note: This project is currently still under development.***
-<br>
-<br>
-
 ## Overview
 This is the backend for an Online Electronics Store built using Spring framework. The backend utilizes Spring Security with JWT tokens for authentication and authorization. MySQL is used as the database management system.  
 During development I followed MVC (Model View Controller) Architecture. I tried to go along with the best practices for making a REST servcie in Spring
@@ -17,7 +13,15 @@ During development I followed MVC (Model View Controller) Architecture. I tried 
 - **Spring Security**: JWT tokens are implemented for secure authentication and authorization.
 - **MySQL Database**: Data is stored and managed using MySQL, a popular relational database management system.
 - **RESTful API**: The backend exposes RESTful endpoints to interact with the frontend or other systems.
-- **Schema Connections**: ![image](https://github.com/koslinj/Online-Electronics-Store-Backend/assets/97230028/1312458e-7ad5-4950-bdc3-c7e3c6848521)
+- **Schema Connections**: ![image](https://github.com/koslinj/Online-Electronics-Store-Backend/assets/97230028/f478f0a4-69d2-49a1-b184-bc925ed63abd)
+The backend utilizes a database connection to store various types of data essential for running the shop. Here's an overview of the data entities managed by the backend:
+
+- **Opinions**: Feedback or reviews provided by users about products or services.
+- **Users**: Information about the users registered in the shop application.
+- **Addresses**: Details of user addresses for shipping and billing purposes.
+- **Purchase Orders**: Records of orders made by users including the purchased products, quantities, and transaction details.
+- **Products**: Information about the products available in the shop including their names, descriptions, prices, etc.
+- **Product Filters**: Criteria or attributes used for filtering products, such as category, brand, technical details, etc.
 
 ## Usage
 - Use the exposed API endpoints to perform CRUD operations on electronic products, user accounts, etc.
