@@ -1,7 +1,11 @@
 # Online Electronics Store Backend
 
 ## Overview
-This is the backend for an Online Electronics Store built using Spring framework. The backend utilizes Spring Security with JWT tokens for authentication and authorization. MySQL is used as the database management system.  
+This is the backend for an Online Electronics Store website built using Spring framework.  
+The website is located at: https://github.com/koslinj/Online-Electronics-Store  
+  
+The backend utilizes Spring Security with JWT tokens for authentication and authorization. MySQL is used as the database management system.  
+  
 During development I followed MVC (Model View Controller) Architecture. I tried to go along with the best practices for making a REST servcie in Spring
 
 - **Models (Entities)**: Contains the domain models representing database entities.
